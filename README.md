@@ -1,6 +1,6 @@
 # yokmen.github.io
 
-Personal portfolio of **Yvahn Okmen**, physics engineer specialized in quantum applications, with a background in nuclear reactors and particle accelerators.
+Physics engineer specialized in quantum applications, with a background in nuclear reactors and particle accelerators.
 
 Live site: [yokmen.github.io](https://yokmen.github.io)
 
