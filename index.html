@@ -2,10 +2,576 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name — Quantum Engineer</title>
+  <meta name="description" content="Physics engineer specialized in quantum applications.">
+
+  <!-- Fonts: distinctive serif + clean sans + mono accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- DESIGN TOKENS ---------- */
+    :root {
+      --bg: #0a0e1a;
+      --bg-2: #111726;
+      --surface: #161d2f;
+      --border: #1f2940;
+      --text: #e8ecf5;
+      --text-dim: #8a93a8;
+      --text-mute: #5a6378;
+      --cyan: #5eead4;
+      --cyan-bright: #67e8f9;
+      --magenta: #f0abfc;
+      --serif: 'Fraunces', 'Times New Roman', serif;
+      --sans: 'Manrope', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      /* Subtle circuit-grid texture */
+      background-image:
+        radial-gradient(circle at 25% 10%, rgba(94, 234, 212, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(240, 171, 252, 0.04) 0%, transparent 40%),
+        linear-gradient(rgba(94, 234, 212, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(94, 234, 212, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+    }
+
+    ::selection { background: var(--cyan); color: var(--bg); }
+
+    /* ---------- NAV ---------- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10, 14, 26, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    nav .logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    nav ul { display: flex; gap: 2.5rem; list-style: none; }
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    nav a:hover { color: var(--text); }
+    nav a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--cyan);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+
+    /* ---------- LAYOUT ---------- */
+    main { padding-top: 5rem; }
+    section { padding: 7rem 3rem; max-width: 1280px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-label::before {
+      content: ''; width: 30px; height: 1px; background: var(--cyan);
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 3rem;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--magenta);
+      font-weight: 300;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: calc(100vh - 5rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 4rem 3rem;
+    }
+    .hero-text .greeting {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+    .hero-text h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(3rem, 6.5vw, 5.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .hero-text h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cyan);
+    }
+    .hero-text .role {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+    .hero-text .role span { color: var(--magenta); }
+    .hero-text .bio {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; }
+    .btn {
+      padding: 0.85rem 1.75rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.3s ease;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(94, 234, 212, 0.05);
+    }
+    .btn-primary {
+      border-color: var(--cyan);
+      color: var(--bg);
+      background: var(--cyan);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--cyan);
+    }
+
+    .hero-image {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: contrast(1.05) saturate(1.1);
+    }
+    .hero-image::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(94,234,212,0.1) 0%, transparent 50%, rgba(240,171,252,0.08) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-image .caption {
+      position: absolute; bottom: 1rem; left: 1rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      letter-spacing: 0.15em;
+      background: rgba(10,14,26,0.7);
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--border);
+      z-index: 2;
+    }
+
+    /* ---------- PROJECT GRID ---------- */
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .project::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    .project:hover { transform: translateY(-4px); border-color: var(--cyan); }
+    .project:hover::before { transform: scaleX(1); }
+    .project-num {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .project h3 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .project p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      background: rgba(94, 234, 212, 0.08);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+    }
+    .project-links {
+      display: flex; gap: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+    .project-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+    }
+    .project-links a:hover { color: var(--cyan); border-color: var(--cyan); }
+
+    /* ---------- COURSES ---------- */
+    .courses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .course-year h3 {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--magenta);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .course-list { list-style: none; }
+    .course-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 1rem;
+      transition: padding 0.3s ease;
+    }
+    .course-list li:hover { padding-left: 0.5rem; }
+    .course-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .course-code {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 3rem;
+      margin-top: 4rem;
+      text-align: center;
+    }
+    footer .contact-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+    footer .contact-links {
+      display: flex; justify-content: center; gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    footer .contact-links a {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+    footer .contact-links a:hover { color: var(--cyan); }
+    footer .copyright {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      letter-spacing: 0.1em;
+    }
+
+    /* ---------- REVEAL ANIMATION ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.25rem; }
+      nav a { font-size: 0.8rem; }
+      section { padding: 5rem 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2.5rem; }
+      .hero-image { order: -1; }
+      .projects { grid-template-columns: 1fr; }
+      .courses-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hi, I'm [Your Name]</h1>
-  <p>Welcome to my portfolio. More coming soon!</p>
+
+  <!-- ========== NAV ========== -->
+  <nav>
+    <div class="logo">⟨ψ| YOUR.NAME |ψ⟩</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#academic">Academic</a></li>
+      <li><a href="#personal">Personal</a></li>
+      <li><a href="#courses">Courses</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ========== HOME / HERO ========== -->
+    <section id="home" class="hero">
+      <div class="hero-text reveal">
+        <div class="greeting">// Hello, world</div>
+        <h1>I'm <em>Your Name</em>.</h1>
+        <div class="role">Physics Engineer · <span>Quantum Applications</span></div>
+        <p class="bio">
+          I design and study systems where information lives in superposition. My work
+          sits at the intersection of theoretical physics, quantum hardware, and the
+          algorithms that run on it — from simulation to fabrication-aware design.
+        </p>
+        <div class="hero-cta">
+          <a href="#academic" class="btn btn-primary">View Work →</a>
+          <a href="#contact" class="btn">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-image reveal">
+        <img src="assets/quantum-chip.jpg" alt="Quantum processor chip with illuminated qubits">
+        <div class="caption">QPU · QUBIT ARRAY</div>
+      </div>
+    </section>
+
+    <!-- ========== ACADEMIC PROJECTS ========== -->
+    <section id="academic">
+      <div class="section-label reveal">01 — Academic Projects</div>
+      <h2 class="section-title reveal">Research & <em>coursework</em></h2>
+      <div class="projects">
+
+        <article class="project reveal">
+          <div class="project-num">PROJECT 01</div>
+          <h3>Variational Quantum Eigensolver for H₂</h3>
+          <p>Implementation of VQE on a 4-qubit ansatz to find the ground state energy of molecular hydrogen. Comparison of UCCSD vs hardware-efficient ansätze on noisy simulators.</p>
+          <div class="project-tags">
+            <span class="tag">Qiskit</span>
+            <span class="tag">Python</span>
+            <span class="tag">VQE</span>
+          </div>
+          <div class="project-links">
+            <a href="#">View report →</a>
+            <a href="#">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-num">PROJECT 02</div>
+          <h3>Master's Thesis — [Working Title]</h3>
+          <p>Brief description of your thesis topic. What problem you're solving, what approach you're using, and what makes it interesting. One or two sentences max.</p>
+          <div class="project-tags">
+            <span class="tag">Thesis</span>
+            <span class="tag">In progress</span>
+          </div>
+          <div class="project-links">
+            <a href="#">Abstract →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-num">PROJECT 03</div>
+          <h3>Quantum Error Correction Simulation</h3>
+          <p>Numerical study of the surface code threshold under depolarizing noise. Implemented MWPM decoder and benchmarked logical error rates across code distances.</p>
+          <div class="project-tags">
+            <span class="tag">QEC</span>
+            <span class="tag">Stim</span>
+            <span class="tag">C++</span>
+          </div>
+          <div class="project-links">
+            <a href="#">View report →</a>
+            <a href="#">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-num">PROJECT 04</div>
+          <h3>Project Title</h3>
+          <p>Short description of another academic project. Edit this with your real content — keep each description focused and concrete.</p>
+          <div class="project-tags">
+            <span class="tag">Tag</span>
+            <span class="tag">Tag</span>
+          </div>
+          <div class="project-links">
+            <a href="#">GitHub →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== PERSONAL PROJECTS ========== -->
+    <section id="personal">
+      <div class="section-label reveal">02 — Personal Projects</div>
+      <h2 class="section-title reveal">Built for <em>curiosity</em></h2>
+      <div class="projects">
+
+        <article class="project reveal">
+          <div class="project-num">PROJECT 01</div>
+          <h3>Quantum Circuit Visualizer</h3>
+          <p>A web tool that lets you draw quantum circuits in the browser and see the state vector evolve in real time on the Bloch sphere. Built to explain concepts to first-year students.</p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Three.js</span>
+            <span class="tag">WebGL</span>
+          </div>
+          <div class="project-links">
+            <a href="#">Live demo →</a>
+            <a href="#">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-num">PROJECT 02</div>
+          <h3>Project Name</h3>
+          <p>Short description of a personal project — something you built for fun, to learn a new tool, or scratch a personal itch. The honest, conversational tone often works best here.</p>
+          <div class="project-tags">
+            <span class="tag">Tag</span>
+            <span class="tag">Tag</span>
+          </div>
+          <div class="project-links">
+            <a href="#">GitHub →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== COURSES ========== -->
+    <section id="courses">
+      <div class="section-label reveal">03 — Master's Coursework</div>
+      <h2 class="section-title reveal">What I've <em>studied</em></h2>
+      <div class="courses-grid">
+
+        <div class="course-year reveal">
+          <h3>M1 — First Year</h3>
+          <ul class="course-list">
+            <li><span class="course-name">Quantum Mechanics II</span><span class="course-code">PHYS·501</span></li>
+            <li><span class="course-name">Statistical Physics</span><span class="course-code">PHYS·502</span></li>
+            <li><span class="course-name">Solid State Physics</span><span class="course-code">PHYS·510</span></li>
+            <li><span class="course-name">Numerical Methods</span><span class="course-code">CSCI·520</span></li>
+            <li><span class="course-name">Electrodynamics</span><span class="course-code">PHYS·530</span></li>
+            <li><span class="course-name">Mathematical Methods</span><span class="course-code">MATH·540</span></li>
+          </ul>
+        </div>
+
+        <div class="course-year reveal">
+          <h3>M2 — Second Year</h3>
+          <ul class="course-list">
+            <li><span class="course-name">Quantum Information Theory</span><span class="course-code">PHYS·601</span></li>
+            <li><span class="course-name">Quantum Computing</span><span class="course-code">PHYS·602</span></li>
+            <li><span class="course-name">Quantum Optics</span><span class="course-code">PHYS·610</span></li>
+            <li><span class="course-name">Open Quantum Systems</span><span class="course-code">PHYS·620</span></li>
+            <li><span class="course-name">Quantum Hardware</span><span class="course-code">PHYS·630</span></li>
+            <li><span class="course-name">Research Seminar</span><span class="course-code">PHYS·690</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== FOOTER / CONTACT ========== -->
+    <footer id="contact">
+      <p class="contact-title">Let's <em>talk</em>.</p>
+      <div class="contact-links">
+        <a href="mailto:your.email@example.com">EMAIL</a>
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener">GITHUB</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LINKEDIN</a>
+        <a href="assets/cv.pdf" target="_blank">CV / PDF</a>
+      </div>
+      <p class="copyright">© 2026 · BUILT WITH HTML, CSS, AND COFFEE</p>
+    </footer>
+
+  </main>
+
+  <script>
+    // Reveal-on-scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
