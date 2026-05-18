@@ -25,3 +25,4 @@ A static single-page portfolio covering:
 - [Heston Model Solver](https://github.com/yokmen/Heston_Model_Solver) — parallel C solver for the Heston stochastic-volatility PDE, generating HDF5 datasets for ML option pricing
 - [Machine Learning Library From Scratch](https://github.com/yokmen/Machine_Learning_Library_From_Scratch) — minimal neural network library in C with a tiny reverse-mode autodiff engine; trains an MLP on MNIST
 - [Quantum Algorithms](https://github.com/yokmen/Quantum_Algorithms) — Qiskit study path from Hilbert spaces and gates to Grover, Shor, HHL, VQE, QAOA, error correction, and complexity theory
+- [Black Hole Geodesics](https://github.com/yokmen/Black-Hole-Geodesics_Computation) — C + Python pipeline integrating Schwarzschild geodesics with RK4; recovers photon sphere, ISCO, perihelion precession, and animates trajectories from HDF5
