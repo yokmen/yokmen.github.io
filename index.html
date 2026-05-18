@@ -289,16 +289,16 @@
 
     /* ---------- COURSES ---------- */
     .courses-grid {
-      column-count: 2;
-      column-gap: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
     }
-    .course-year {
-      break-inside: avoid;
-      -webkit-column-break-inside: avoid;
-      page-break-inside: avoid;
-      margin-bottom: 2.5rem;
+    .courses-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
     }
-    .course-year:last-child { margin-bottom: 0; }
     .course-year h3 {
       font-family: var(--mono);
       font-size: 0.85rem;
@@ -382,7 +382,7 @@
       .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2.5rem; }
       .hero-image { order: -1; }
       .projects { grid-template-columns: 1fr; }
-      .courses-grid { column-count: 1; column-gap: 2.5rem; }
+      .courses-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
   </style>
 </head>
@@ -535,68 +535,76 @@
       <h2 class="section-title reveal">What I've <em>studied</em></h2>
       <div class="courses-grid">
 
-        <div class="course-year reveal">
-          <h3>Quantum Physics & Quantum Information</h3>
-          <ul class="course-list">
-            <li><span class="course-name">Quantum mechanics II</span></li>
-            <li><span class="course-name">Quantum information and computation</span></li>
-            <li><span class="course-name">Quantum optics</span></li>
-            <li><span class="course-name">Advanced condensed matter and quantum many-body systems</span></li>
-          </ul>
+        <div class="courses-column">
+
+          <div class="course-year reveal">
+            <h3>Quantum Physics & Quantum Information</h3>
+            <ul class="course-list">
+              <li><span class="course-name">Quantum mechanics II</span></li>
+              <li><span class="course-name">Quantum information and computation</span></li>
+              <li><span class="course-name">Quantum optics</span></li>
+              <li><span class="course-name">Advanced condensed matter and quantum many-body systems</span></li>
+            </ul>
+          </div>
+
+          <div class="course-year reveal">
+            <h3>Nuclear Reactors & Radiation</h3>
+            <ul class="course-list">
+              <li><span class="course-name">Introductory nuclear and atomic physics</span></li>
+              <li><span class="course-name">Nuclear reactor physics</span></li>
+              <li><span class="course-name">Nuclear measurement techniques</span></li>
+              <li><span class="course-name">Operation, control and safety of nuclear systems</span></li>
+              <li><span class="course-name">Physical aspects of radiation protection</span></li>
+            </ul>
+          </div>
+
+          <div class="course-year reveal">
+            <h3>Theoretical Physics & Cosmology</h3>
+            <ul class="course-list">
+              <li><span class="course-name">Theory of gravitation</span></li>
+              <li><span class="course-name">Cosmology</span></li>
+              <li><span class="course-name">Statistical physics and plasma physics</span></li>
+            </ul>
+          </div>
+
         </div>
 
-        <div class="course-year reveal">
-          <h3>Nuclear Reactors & Radiation</h3>
-          <ul class="course-list">
-            <li><span class="course-name">Introductory nuclear and atomic physics</span></li>
-            <li><span class="course-name">Nuclear reactor physics</span></li>
-            <li><span class="course-name">Nuclear measurement techniques</span></li>
-            <li><span class="course-name">Operation, control and safety of nuclear systems</span></li>
-            <li><span class="course-name">Physical aspects of radiation protection</span></li>
-          </ul>
-        </div>
+        <div class="courses-column">
 
-        <div class="course-year reveal">
-          <h3>Particle Accelerators</h3>
-          <ul class="course-list">
-            <li><span class="course-name">Introduction to accelerator physics</span></li>
-          </ul>
-        </div>
+          <div class="course-year reveal">
+            <h3>Condensed Matter & Optics</h3>
+            <ul class="course-list">
+              <li><span class="course-name">Collective and cooperative phenomena in solids</span></li>
+              <li><span class="course-name">Laser physics</span></li>
+              <li><span class="course-name">Medical imaging and optical microscopy</span></li>
+            </ul>
+          </div>
 
-        <div class="course-year reveal">
-          <h3>Theoretical Physics & Cosmology</h3>
-          <ul class="course-list">
-            <li><span class="course-name">Theory of gravitation</span></li>
-            <li><span class="course-name">Cosmology</span></li>
-            <li><span class="course-name">Statistical physics and plasma physics</span></li>
-          </ul>
-        </div>
+          <div class="course-year reveal">
+            <h3>Numerical & Applied Mathematics</h3>
+            <ul class="course-list">
+              <li><span class="course-name">Numerical methods</span></li>
+              <li><span class="course-name">Monte Carlo methods</span></li>
+              <li><span class="course-name">Mathematics and economic modelling</span></li>
+            </ul>
+          </div>
 
-        <div class="course-year reveal">
-          <h3>Condensed Matter & Optics</h3>
-          <ul class="course-list">
-            <li><span class="course-name">Collective and cooperative phenomena in solids</span></li>
-            <li><span class="course-name">Laser physics</span></li>
-            <li><span class="course-name">Medical imaging and optical microscopy</span></li>
-          </ul>
-        </div>
+          <div class="course-year reveal">
+            <h3>Particle Accelerators</h3>
+            <ul class="course-list">
+              <li><span class="course-name">Introduction to accelerator physics</span></li>
+            </ul>
+          </div>
 
-        <div class="course-year reveal">
-          <h3>Numerical & Applied Mathematics</h3>
-          <ul class="course-list">
-            <li><span class="course-name">Numerical methods</span></li>
-            <li><span class="course-name">Monte Carlo methods</span></li>
-            <li><span class="course-name">Mathematics and economic modelling</span></li>
-          </ul>
-        </div>
+          <div class="course-year reveal">
+            <h3>Engineering Projects & Research</h3>
+            <ul class="course-list">
+              <li><span class="course-name">Reliability and safety</span></li>
+              <li><span class="course-name">Project in physics engineering</span></li>
+              <li><span class="course-name">Master thesis in physics engineering</span></li>
+            </ul>
+          </div>
 
-        <div class="course-year reveal">
-          <h3>Engineering Projects & Research</h3>
-          <ul class="course-list">
-            <li><span class="course-name">Reliability and safety</span></li>
-            <li><span class="course-name">Project in physics engineering</span></li>
-            <li><span class="course-name">Master thesis in physics engineering</span></li>
-          </ul>
         </div>
 
       </div>
