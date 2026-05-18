@@ -160,6 +160,8 @@
       color: var(--text-dim);
       max-width: 480px;
       margin-bottom: 2.5rem;
+      text-align: justify;
+      hyphens: auto;
     }
     .hero-cta { display: flex; gap: 1rem; }
     .btn {
@@ -286,7 +288,17 @@
     .project-links a:hover { color: var(--cyan); border-color: var(--cyan); }
 
     /* ---------- COURSES ---------- */
-    .courses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .courses-grid {
+      column-count: 2;
+      column-gap: 4rem;
+    }
+    .course-year {
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+      margin-bottom: 2.5rem;
+    }
+    .course-year:last-child { margin-bottom: 0; }
     .course-year h3 {
       font-family: var(--mono);
       font-size: 0.85rem;
@@ -370,7 +382,7 @@
       .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2.5rem; }
       .hero-image { order: -1; }
       .projects { grid-template-columns: 1fr; }
-      .courses-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .courses-grid { column-count: 1; column-gap: 2.5rem; }
     }
   </style>
 </head>
